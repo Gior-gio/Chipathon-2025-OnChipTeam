@@ -76,13 +76,13 @@ save all
 ** OP simulation
 op
 ** Output swing
-dc Vsweep 0 1.8 0.01 
+dc Vsweep 0 CACE\{VDD\} 0.01 
 
 setplot dc1
 let dvout = deriv(v(Vout))
 
-meas dc limmin when dvout=0.98 rise=1
-meas dc limmax when dvout=0.98 fall=1
+meas dc limmin when dvout=0.99 rise=1
+meas dc limmax when dvout=0.99 fall=1
 
 let Output_swing = limmax - limmin
 

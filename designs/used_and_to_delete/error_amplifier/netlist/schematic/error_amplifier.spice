@@ -1,0 +1,6 @@
+** sch_path: /foss/designs/chipathon_2025/designs/gf180/error_amplifier/xschem/error_amplifier.sch
+.subckt error_amplifier Vout V+ V- Vref VDD VSS Vcomn
+*.PININFO V+:I Vout:B V-:I Vref:I VDD:B VSS:B Vcomn:B
+*  x1 -  error_amplifier_core  IS MISSING !!!!
+*  x2 -  error_amplifier_bias  IS MISSING !!!!
+.ends

@@ -1,0 +1,201 @@
+#--------------------------------------------------------------
+# CACE circuit characterization file
+#--------------------------------------------------------------
+
+name:           folded_ac_tb
+description:    Folded cascode full
+PDK:            sky130A
+
+cace_format:    5.2
+
+authorship:
+  designer:         Julian Romero
+  company:          OnChip UIS
+  creation_date:    May 9, 2025
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  layout:           gds
+  netlist:          netlist
+  documentation:    docs
+
+pins:
+  VDD:
+    description: Positive analog power supply
+    type: power
+    direction: inout
+    Vmin: 1.7
+    Vmax: 1.9
+  VSS:
+    description: Analog ground
+    type: ground
+    direction: inout
+  Vout:
+    description: Output voltage
+    type: signal
+    direction: inout
+  Vcomn:
+    description: Compensation pin
+    type: signal
+    direction: inout
+  V+:
+    description: Non inverting input
+    type: signal
+    direction: input
+  V-:
+    description: Inverting input
+    type: signal
+    direction: input
+
+default_conditions:
+  VDD:
+    description: Analog power supply voltage
+    display: VDD
+    unit: V
+    typical: 1.8
+  Vref:
+    description: Voltage reference from BandGAP
+    display: VrefBG
+    unit: V
+    typical: 1.2
+  corner:
+    description: Process corner
+    display: Corner
+    typical: tt
+  temperature:
+    description: Ambient temperature
+    display: Temp
+    unit: °C
+    typical: 27
+
+parameters:
+  stb_params:
+    display: AC Params
+    spec:
+      A0:
+        display: A0
+        description: DC Gain
+        unit: dB
+        minimum:
+          value: 70
+        typical:
+          value: any
+        maximum:
+          value: any
+      UGB:
+        display: UGB
+        description: Unit Gain Bandwith
+        unit: Hz
+        minimum:
+          value: 2e9
+        typical:
+          value: any
+        maximum:
+          value: any
+      PM:
+        display: PM
+        description: Phase Margin
+        unit: deg
+        minimum:
+          value: 45
+        typical:
+          value: 55
+        maximum:
+          value: any
+      GM:
+        display: GM
+        description: Gain Margin
+        unit: dB
+        minimum:
+          value: 10
+        typical:
+          value: 12
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: ac.sch
+        format: ascii
+        suffix: .data
+        variables: [Vout, Power, Offset]
+
+  magic_area:
+    spec:
+      area:
+        display: Area
+        description: Total circuit layout area
+        unit: µm²
+        maximum:
+          value: any
+      width:
+        display: Width
+        description: Total circuit layout width
+        unit: µm
+        maximum:
+          value: any
+      height:
+        display: Height
+        description: Total circuit layout height
+        unit: µm
+        maximum:
+          value: any
+    tool:
+      magic_area
+      
+  magic_drc:
+    description: Magic DRC
+    display: Magic DRC
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      magic_drc:
+        gds_flatten: true
+
+  netgen_lvs:
+    description: Netgen LVS
+    display: Netgen LVS
+    spec:
+      lvs_errors:
+        maximum:
+          value: 0
+    tool:
+      netgen_lvs:
+        script: run_project_lvs.tcl
+
+  klayout_drc_feol:
+    description: KLayout DRC feol
+    display: KLayout DRC feol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true']
+
+  klayout_drc_beol:
+    description: KLayout DRC beol
+    display: KLayout DRC beol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'beol=true']
+
+  klayout_drc_full:
+    description: KLayout DRC full
+    display: KLayout DRC full
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+        klayout_drc:
+            args: ['-rd', 'feol=true', '-rd', 'beol=true', '-rd', 'offgrid=true']
+      

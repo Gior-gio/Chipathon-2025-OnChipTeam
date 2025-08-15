@@ -85,8 +85,219 @@ default_conditions:
     display: Temp
     unit: °C
     typical: 27
+  mult:
+    description: Multiplayers for the current characterization
+    display: mult
+    unit: 
+    typical: 1
     
 parameters:
+
+  dc_params:
+    display: DC Params
+    spec:
+      Iref_1n:
+        display: Iref 1n
+        description: Currente NMOS reference of 1uA
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: 1
+        maximum:
+          value: any
+      Iref_50n:
+        display: Iref 50n
+        description: Currente NMOS reference of 1uA
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: 50
+        maximum:
+          value: any
+      Iref_1p:
+        display: Iref 1p
+        description: Currente NMOS reference of 1uA
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: 1
+        maximum:
+          value: any
+      Iref_50p:
+        display: Iref 50p
+        description: Currente NMOS reference of 1uA
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: 50
+        maximum:
+          value: any
+      Iqscnt:
+        display: Iqscnt
+        description: Quiescent current of the current reference generator
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: current_reference_generator_CACE_op.sch
+        format: ascii
+        suffix: .data
+        variables: [Iref_1n, Iref_50n, Iref_1p, Iref_50p, Iqscnt, null, null]
+    conditions:
+      corner:
+        enumerate: [typical]
+      VDD:
+        minimum: 1.62
+        typical: 1.8
+        maximum: 1.98
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 125
+    plot:
+      Iref_1n_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: Iref_1n
+      Iref_1n_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: Iref_1n
+      Iref_1n_vs_VDD:
+        type: xyplot
+        xaxis: VDD
+        yaxis: Iref_1n
+        
+   
+  characterization_params:
+    display: Characterization parameters
+    spec:
+      I_char_n:
+        display: N-current-char
+        description: N-current characterization
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      I_char_p:
+        display: P-current-char
+        description: P-current characterization
+        unit: uA
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: current_reference_generator_CACE_op.sch
+        format: ascii
+        suffix: .data
+        variables: [null, null, null, null, null, I_char_n, I_char_p]
+    conditions:
+      corner:
+        enumerate: [ss, fs, ff, sf, typical]
+      VDD:
+        minimum: 1.62
+        typical: 1.8
+        maximum: 1.98
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 125
+      mult:
+        enumerate: [1, 10, 20, 30, 40, 50]
+    plot:
+      I_char_n_vs_mult:
+        type: xyplot
+        xaxis: mult
+        yaxis: I_char_n
+      I_char_p_vs_mult:
+        type: xyplot
+        xaxis: mult
+        yaxis: I_char_p
+        
+
+  ac_param:
+    description: Small signal analysis
+    display: AC param
+    spec:
+      A0:
+        display: DC gain
+        description: The open loop gain in DC.
+        unit: dB
+        minimum:
+          value: 90
+        typical:
+          value: any
+        maximum:
+          value: any
+      UGB:
+        display: Unity Gain Bandwith
+        description: The unity gain Bandwith 
+        unit: MHz
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      PM:
+        display: Phase Margin
+        description: The phase margin
+        unit: °
+        minimum:
+          value: 45
+        typical:
+          value: any
+        maximum:
+          value: any
+      GM:
+        display: Gain Margin
+        description: The Gain margin
+        unit: dB
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: current_reference_generator_CACE_ac.sch
+        format: ascii
+        suffix: .data
+        variables: [A0, UGB, PM, GM]
+    plot:
+      gain_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: A0
+    conditions:
+      corner:
+        enumerate: [typical]
+      VDD:
+        minimum: 1.62
+        typical: 1.8
+        maximum: 1.98
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 125
+        
   psr_param:
     description: Power supply rejectior of the current
     display: PSR param
@@ -131,24 +342,7 @@ parameters:
           value: any
         maximum:
           value: any
-    tool:
-      ngspice:
-        template: current_reference_generator_CACE_psr.sch
-        format: ascii
-        suffix: .data
-        variables: [psr_1n, psr_50n, psr_1p, psr_50p]
-    conditions:
-      VDD:
-        minimum: 1.62
-        typical: 1.8
-        maximum: 1.98
-      temperature:
-        minimum: -40
-        typical: 27
-        maximum: 125
-      corner:
-        enumerate: [typical]
-
+          
   magic_area:
     spec:
       area:

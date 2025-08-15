@@ -1,0 +1,38 @@
+Using run time directory XSCHEM_SHAREDIR = /foss/tools/xschem/share/xschem
+Sourcing /foss/tools/xschem/share/xschem/xschemrc init file
+Sourcing /foss/designs/chipathon_2025/designs/gf180/error_amplifier/xschem/xschemrc init file
+open_pdks installation: using /foss/pdks
+SKYWATER_MODELS: /foss/pdks/sky130A/libs.tech/combined
+SKYWATER_STDCELLS: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice
+setup_tcp_bespice: problems finding a free TCP port
+couldn't open socket: address already in use
+l_s_d(): Symbol not found: gf180/error_amplifier_core/xschem/error_amplifier_core.sym
+l_s_d(): Symbol not found: gf180/error_amplifier_bias/xschem/error_amplifier_bias.sym
+l_s_d(): Symbol not found: gf180/error_amplifier_core/xschem/error_amplifier_core.sym
+l_s_d(): Symbol not found: gf180/error_amplifier_bias/xschem/error_amplifier_bias.sym
+l_s_d(): Symbol not found: gf180/error_amplifier_core/xschem/error_amplifier_core.sym
+l_s_d(): Symbol not found: gf180/error_amplifier_bias/xschem/error_amplifier_bias.sym
+-----------/foss/designs/chipathon_2025/designs/gf180/error_amplifier/xschem/error_amplifier.sch
+Warning: open net: Vref
+Warning: open net: VDD
+Warning: open net: VSS
+Warning: open net: V+
+Warning: open net: V-
+Error: undriven node: #net1
+Error: undriven node: #net2
+Error: undriven node: #net3
+Warning: open net: Vcomn
+Warning: open net: Vout
+-----------/foss/designs/chipathon_2025/designs/gf180/error_amplifier/xschem/error_amplifier.sch
+
+Xschem process returned error code 10
+
+Error in netlist generation:
+Subcircuit error_amplifier_core was not found!
+Error in netlist generation:
+Subcircuit error_amplifier_bias was not found!
+No (compressed) GDS layout found.
+No layout for project error_amplifier found.
+No (compressed) GDS layout found.
+No layout for project error_amplifier found.
+Failed to regenerate project netlist, aborting.

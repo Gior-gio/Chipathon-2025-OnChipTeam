@@ -1,0 +1,35 @@
+v {xschem version=3.4.7 file_version=1.2}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+V {}
+S {}
+E {}
+L 4 -40 0 -20 0 {}
+L 4 10 0 30 0 {}
+L 4 -20 0 -10 -30 {}
+L 4 -10 -30 0 20 {}
+L 4 0 20 10 0 {}
+L 7 0 -80 0 -60 {}
+L 7 -110 -30 -90 -30 {}
+L 7 80 -30 100 -30 {}
+L 7 80 30 100 30 {}
+L 7 -110 30 -90 30 {}
+L 7 0 60 0 80 {}
+B 5 -2.5 -82.5 2.5 -77.5 {name=VDD dir=inout}
+B 5 -112.5 -32.5 -107.5 -27.5 {name=Vcmp dir=inout}
+B 5 97.5 -32.5 102.5 -27.5 {name=Vspk dir=inout}
+B 5 97.5 27.5 102.5 32.5 {name=Vrst dir=inout}
+B 5 -112.5 27.5 -107.5 32.5 {name=Ven dir=inout}
+B 5 -2.5 77.5 2.5 82.5 {name=VSS dir=inout}
+P 4 5 80 -60 -90 -60 -90 60 80 60 80 -60 {}
+T {@spike_generator} -255.5 -136 0 0 0.3 0.3 {}
+T {@spike_generator} 5 -82 0 0 0.2 0.2 {}
+T {VDD} -35 -66 2 1 0.2 0.2 {}
+T {Vcmp} -55 -34 0 1 0.2 0.2 {}
+T {Vspk} 45 -26 2 1 0.2 0.2 {}
+T {Vrst} 55 34 2 1 0.2 0.2 {}
+T {Ven} -65 26 0 1 0.2 0.2 {}
+T {VSS} -15 66 0 1 0.2 0.2 {}

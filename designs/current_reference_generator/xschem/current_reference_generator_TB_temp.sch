@@ -35,7 +35,7 @@ C {lab_pin.sym} 920 -210 2 1 {name=p3 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 920 -170 2 1 {name=p6 sig_type=std_logic lab=VSS}
 C {noconn.sym} 940 -280 2 0 {name=l8}
 C {noconn.sym} 940 -380 2 0 {name=l9}
-C {gf180/current_reference_load/xschem/current_reference_load.sym} 1060 -190 0 0 {name=x3}
+C {gf180/current_reference_load/xschem/current_reference_load.sym} 1060 -190 0 0 {name=x2}
 C {devices/code_shown.sym} 50 -620 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -67,6 +67,11 @@ C {simulator_commands.sym} 910 -630 0 0 {name=COMMANDS1
 simulator=ngspice
 only_toplevel=false 
 value="
+.save @m.x2.xm1.m0[id]
+.save @m.x2.xm2.m0[id]
+.save @m.x2.xm3.m0[id]
+.save @m.x2.xm4.m0[id]
+
 .control
 save all
 
@@ -431,11 +436,12 @@ write current_reference_generator_TB_temp.raw
 
 * Temp results
 setplot dc1
-let id_ref = @m.x1.x2.xm1.m0[id]
-plot id_ref
-
-.endc
-"
+let id_n1 = @m.x2.xm1.m0[id]
+let id_n50 = @m.x2.xm2.m0[id]
+let id_p1 = @m.x2.xm3.m0[id]
+let id_p50 = @m.x2.xm4.m0[id]
+plot id_n1 id_p1
+plot id_n50 id_p50
 
 .endc
 "}

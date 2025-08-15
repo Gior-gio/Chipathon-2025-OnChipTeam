@@ -50,7 +50,7 @@ N 1610 -380 1610 -320 {lab=#net4}
 N 1650 -380 1650 -320 {lab=#net5}
 N 1530 -380 1530 -320 {lab=#net2}
 C {res.sym} 1140 -220 0 0 {name=R1
-value=240k
+value=600k
 footprint=1206
 device=resistor
 m=1}
@@ -114,7 +114,7 @@ value="
 .save @m.x3.xm4.m0[id]
 .param sw_stat_global = 1
 .param sw_stat_mismatch = 1
-
+.option filetype=ascii
 *.save all
 .control
   let mc_runs = 1000
@@ -194,6 +194,8 @@ let diff_sq_p50 = diff_p50 * diff_p50
 let variance_p50 = avg(diff_sq_p50)
 let stddev_val_p50 = sqrt(variance_p50)  ; Store stddev in scalar variable
 let stddev_p50 = stddev_val_p50[mc_runs-1]
+
+write mc_data.raw \{$scratch\}.current_n1 \{$scratch\}.current_n50 \{$scratch\}.current_p1 \{$scratch\}.current_p50
 
 * Print statistics
 echo

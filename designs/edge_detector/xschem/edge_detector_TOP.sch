@@ -33,14 +33,14 @@ C {iopin.sym} -240 -550 0 0 {name=p15 lab=VDD}
 C {iopin.sym} -330 -550 0 0 {name=p16 lab=VSS}
 C {ipin.sym} -470 -550 0 0 {name=p17 lab=IN}
 C {opin.sym} -420 -550 0 0 {name=p18 lab=OUT}
-C {designs/edge_detector/xschem/edge_detector_inv.sym} -340 -280 0 0 {name=xINV[0]}
 C {lab_pin.sym} 500 -240 1 1 {name=p11 sig_type=std_logic lab=IN}
 C {lab_pin.sym} 140 -280 3 1 {name=p22 sig_type=std_logic lab=X[3:1]}
 C {lab_pin.sym} -100 -280 3 1 {name=p31 sig_type=std_logic lab=X[2:0]}
 C {lab_pin.sym} 300 -390 3 1 {name=p1 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} 300 -170 1 1 {name=p2 sig_type=std_logic lab=VSS}
-C {designs/edge_detector/xschem/edge_detector_inv.sym} 300 -280 0 0 {name=xINV[4]}
 C {lab_pin.sym} -20 -390 3 1 {name=p3 sig_type=std_logic lab=VDD}
 C {lab_pin.sym} -20 -170 1 1 {name=p8 sig_type=std_logic lab=VSS}
-C {designs/edge_detector/xschem/edge_detector_inv.sym} -20 -280 0 0 {name=xINV1[3:1]}
-C {designs/gate_and/xschem/gate_and.sym} 600 -260 0 0 {name=x1}
+C {gf180/gate_and/xschem/gate_and.sym} 600 -260 0 0 {name=x1}
+C {gf180/gate_inv_x1/gate_inv_x1.sym} -340 -280 0 0 {name=x2[0]}
+C {gf180/gate_inv_x1/gate_inv_x1.sym} -20 -280 0 0 {name=x1[3:1]}
+C {gf180/gate_inv_x1/gate_inv_x1.sym} 300 -280 0 0 {name=x2[4]}

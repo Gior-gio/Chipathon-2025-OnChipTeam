@@ -1,0 +1,227 @@
+#--------------------------------------------------------------
+# CACE circuit characterization file
+#--------------------------------------------------------------
+
+name:           current_reference_generator
+description:    Current reference generator TOP for onchip's chipathon project
+PDK:            gf180mcuD
+
+cace_format:    5.2
+
+authorship:
+  designer:         Ramon Sarmiento & Julian Romero
+  company:          OnChip UIS
+  creation_date:    Mar 31, 2025
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  layout:           gds
+  netlist:          netlist
+  documentation:    docs
+
+pins:
+  VDD:
+    description: Positive analog power supply
+    type: power
+    direction: inout
+    Vmin: 1.62
+    Vmax: 1.98
+  VSS:
+    description: Analog ground
+    type: ground
+    direction: inout
+  Vref:
+    description: Voltage reference from BandGAP
+    type: signal
+    direction: inout
+  Vrefp:
+    description: Voltage reference PMOS for mirroring
+    type: signal
+    direction: inout
+  Vrefn:
+    description: Voltage reference NMOS for mirroring
+    type: signal
+    direction: inout
+  Vres:
+    description: External resistor
+    type: signal
+    direction: inout
+  Iref1n:
+    description: Currente reference NMOS of 1uA
+    type: signal
+    direction: inout
+  Iref50n:
+    description: Currente reference NMOS of 50uA
+    type: signal
+    direction: inout
+  Iref1p:
+    description: Currente reference PMOS of 1uA
+    type: signal
+    direction: inout
+  Iref50p:
+    description: Currente reference PMOS of 50uA
+    type: signal
+    direction: inout
+
+default_conditions:
+  VDD:
+    description: Analog power supply voltage
+    display: VDD
+    unit: V
+    typical: 1.8
+  Vref:
+    description: Voltage reference from BandGAP
+    display: Vref
+    unit: V
+    typical: 1.2
+  corner:
+    description: Process corner
+    display: Corner
+    typical: typical
+  temperature:
+    description: Ambient temperature
+    display: Temp
+    unit: °C
+    typical: 27
+    
+parameters:
+  psr_param:
+    description: Power supply rejectior of the current
+    display: PSR param
+    spec:
+      psr_1n:
+        display: PSR Iref 1n
+        description: PSR N 1uA
+        unit: dB
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      psr_50n:
+        display: PSR Iref 50n
+        description: PSR N 1uA
+        unit: dB
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      psr_1p:
+        display: PSR Iref 1p
+        description: PSR P 1uA
+        unit: dB
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+      psr_50p:
+        display: PSR Iref 50p
+        description: PSR P 50uA
+        unit: dB
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: current_reference_generator_CACE_psr.sch
+        format: ascii
+        suffix: .data
+        variables: [psr_1n, psr_50n, psr_1p, psr_50p]
+    conditions:
+      VDD:
+        minimum: 1.62
+        typical: 1.8
+        maximum: 1.98
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 125
+      corner:
+        enumerate: [typical]
+
+  magic_area:
+    spec:
+      area:
+        display: Area
+        description: Total circuit layout area
+        unit: µm²
+        maximum:
+          value: any
+      width:
+        display: Width
+        description: Total circuit layout width
+        unit: µm
+        maximum:
+          value: any
+      height:
+        display: Height
+        description: Total circuit layout height
+        unit: µm
+        maximum:
+          value: any
+    tool: magic_area
+
+  magic_drc:
+    description: Magic DRC
+    display: Magic DRC
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      magic_drc:
+        gds_flatten: true
+
+  netgen_lvs:
+    description: Netgen LVS
+    display: Netgen LVS
+    spec:
+      lvs_errors:
+        maximum:
+          value: 0
+    tool:
+      netgen_lvs:
+        script: run_project_lvs.tcl
+
+  klayout_drc_feol:
+    description: KLayout DRC feol
+    display: KLayout DRC feol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      klayout_drc:
+        args: ["-rd", "feol=true"]
+
+  klayout_drc_beol:
+    description: KLayout DRC beol
+    display: KLayout DRC beol
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      klayout_drc:
+        args: ["-rd", "beol=true"]
+
+  klayout_drc_full:
+    description: KLayout DRC full
+    display: KLayout DRC full
+    spec:
+      drc_errors:
+        maximum:
+          value: 0
+    tool:
+      klayout_drc:
+        args: ["-rd", "feol=true", "-rd", "beol=true", "-rd", "offgrid=true"]
